@@ -40,8 +40,6 @@ import com.example.myfirebase.view.route.DestinasiHome
 import com.example.myfirebase.viewmodel.HomeViewModel
 import com.example.myfirebase.viewmodel.provider.PenyediaViewModel
 import com.example.myfirebase.viewmodel.StatusUiSiswa
-import androidx.compose.foundation.Image
-import com.example.myfirebase.view.route.DestinasiHome
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
