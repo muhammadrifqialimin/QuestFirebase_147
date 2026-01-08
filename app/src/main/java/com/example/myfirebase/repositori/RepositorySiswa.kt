@@ -33,7 +33,7 @@ class FirebaseRepositorySiswa : RepositorySiswa {
     }
 
     override suspend fun postDataSiswa(siswa: Siswa) {
-        val docRef = if (siswa.id == 0L) collection.document() else collection.document(siswa.id.toString())
+        val docRef = collection.document()
         val data = hashMapOf(
             "id" to (siswa.id.takeIf { it != 0L } ?: docRef.id.hashCode()),
             "nama" to siswa.nama,
@@ -41,5 +41,24 @@ class FirebaseRepositorySiswa : RepositorySiswa {
             "telpon" to siswa.telpon
         )
         docRef.set(data).await()
+    }
+
+    override suspend fun getSatuSiswa(id: Long): Siswa? {
+        return try {
+            val query = collection.whereEqualTo("id", id).get().await()
+            query.documents.firstOrNull()?.let { doc ->
+                Siswa(
+                    id = doc.getLong("id")?.toLong() ?: 0,
+                    nama = doc.getString("nama") ?: "",
+                    alamat = doc.getString("alamat") ?: "",
+                    telpon = doc.getString("telpon") ?: ""
+                )
+            }
+        } catch (e: Exception) {
+            println("Gagal baca data siswa: ${e.message}")
+            null
+        }
+    }
+
     }
 }
