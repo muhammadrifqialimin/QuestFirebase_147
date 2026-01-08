@@ -55,6 +55,12 @@ fun HostNavigasi(
             )
         }
 
+                navigateBack = {
+                    navController.navigate(DestinasiHome.route)
+                }
+            )
+        }
+
             )
         }
     }
