@@ -17,3 +17,11 @@ import kotlinx.coroutines.launch
 
 
 
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EditSiswaScreen(
+    navigateBack: () -> Unit,
+    onNavigateUp: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: EditViewModel = viewModel(factory = PenyediaViewModel.Factory)
